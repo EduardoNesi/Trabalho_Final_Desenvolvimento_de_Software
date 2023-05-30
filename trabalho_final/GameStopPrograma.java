@@ -11,14 +11,23 @@ public class GameStopPrograma {
 
         int opcao = 0;
         do {
-            System.out.println("\n---- GameStop ----");
+            System.out.println("\n             #####                            #####                         " +
+                    "\n            #     #    ##    #    #  ######  #     #  #####   ####   #####  " +
+                    "\n            #         #  #   ##  ##  #       #          #    #    #  #    # " +
+                    "\n            #  ####  #    #  # ## #  #####    #####     #    #    #  #    # " +
+                    "\n            #     #  ######  #    #  #             #    #    #    #  #####  " +
+                    "\n            #     #  #    #  #    #  #       #     #    #    #    #  #      " +
+                    "\n             #####   #    #  #    #  ######   #####     #     ####   #      " +
+                    "\n                                                                            ");
+
             System.out.println("1. Adicionar novo jogo");
             System.out.println("2. Listar todos os jogos");
             System.out.println("3. Listar jogos para menores de 18 anos");
             System.out.println("4. Atualizar dados de um jogo");
             System.out.println("5. Remover um jogo");
-            System.out.println("6. Salvar dados em arquivo");
-            System.out.println("7. Sair");
+            System.out.println("6. Vender jogo");
+            System.out.println("7. Salvar dados em arquivo");
+            System.out.println("8. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt(); // Lê a opção escolhida pelo usuário
 
@@ -42,9 +51,18 @@ public class GameStopPrograma {
                                                                                             // Categoria correspondente
                     System.out.print("Digite a classificação indicativa do jogo: ");
                     int classificacaoIndicativa = scanner.nextInt(); // Lê a classificação indicativa digitada pelo
-                                                                     // usuário
-                    Jogo novoJogo = new Jogo(nome, categoria, classificacaoIndicativa); // Cria um novo jogo com os
-                                                                                        // dados lidos
+                    // usuário
+
+                    System.out.print("Digite a unidade do jogo: ");
+                    int unidade = scanner.nextInt();
+                    scanner.nextLine(); // Consumir a quebra de linha pendente
+                    System.out.print("Digite a região do jogo: ");
+                    String regiao = scanner.nextLine();
+
+                    Jogo novoJogo = new Jogo(nome, categoria, classificacaoIndicativa, unidade, regiao); // Cria um
+                    // novo jogo
+                    // com os
+                    // dados lidos
                     loja.adicionarItem(novoJogo); // Adiciona o jogo à loja
                     System.out.println("Jogo adicionado com sucesso.");
                     break;
@@ -91,7 +109,15 @@ public class GameStopPrograma {
                     // para o valor da enumeração Categoria correspondente
                     System.out.print("Digite a nova classificação indicativa do jogo: ");
                     int novaClassificacaoIndicativa = scanner.nextInt(); // Lê a nova classificação indicativa do jogo
-                    loja.atualizarItem(nomeAtualizar, novoNome, novaCategoria, novaClassificacaoIndicativa); // Atualiza
+
+                    System.out.print("Digite a nova unidade do jogo: ");
+                    int novaUnidades = scanner.nextInt();
+                    scanner.nextLine(); // Consumir a quebra de linha pendente
+                    System.out.print("Digite a nova região do jogo: ");
+                    String novaRegiao = scanner.nextLine();
+
+                    loja.atualizarItem(nomeAtualizar, novoNome, novaCategoria, novaClassificacaoIndicativa,
+                            novaUnidades, novaRegiao); // Atualiza
                     // os dados do jogo na loja
                     System.out.println("Jogo atualizado com sucesso.");
                     break;
@@ -107,10 +133,23 @@ public class GameStopPrograma {
                     break;
 
                 case 6:
+                    scanner.nextLine(); // Consumir a quebra de linha
+                    System.out.print("Digite o nome do jogo que deseja vender: ");
+                    String nomeJogo = scanner.nextLine(); // Lê o nome do jogo a ser atualizado
+
+                    System.out.print("Digite a quantidade de vendas do jogo: ");
+                    int quantidade_vendida = scanner.nextInt();
+
+                    if (!loja.verificarItemExistente(nomeJogo)) {
+                        System.out.println("Jogo não encontrado na loja. Por favor, tente novamente.");
+                    }
+                    loja.venderJogo(nomeJogo, quantidade_vendida);
+                    System.out.println("Jogo vendido com sucesso na loja GameStop.");
+                case 7:
                     loja.salvarDados("dados.txt"); // Salva os dados da loja no arquivo "dados.txt"
                     break;
 
-                case 7:
+                case 8:
                     System.out.println("Saindo...");
                     break;
 
@@ -119,7 +158,7 @@ public class GameStopPrograma {
                     break;
             }
 
-        } while (opcao != 7);
+        } while (opcao != 8);
 
         scanner.close(); // Fecha o Scanner
     }

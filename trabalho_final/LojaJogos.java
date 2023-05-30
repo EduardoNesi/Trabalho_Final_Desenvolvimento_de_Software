@@ -43,7 +43,8 @@ class LojaJogos {
     }
 
     // Método para atualizar os dados de um item da loja
-    public void atualizarItem(String nome, String novoNome, Categoria novaCategoria, int novaClassificacaoIndicativa) {
+    public void atualizarItem(String nome, String novoNome, Categoria novaCategoria, int novaClassificacaoIndicativa,
+            int novaUnidades, String novaRegiao) {
         for (ItemJogo item : itens) { // Percorre a lista de itens
             if (item.getNome().equals(nome) && item instanceof Jogo) { // Verifica se o nome do item corresponde e se é
                                                                        // do tipo Jogo
@@ -51,6 +52,10 @@ class LojaJogos {
                 jogo.setNome(novoNome); // Atualiza os dados do jogo
                 jogo.setCategoria(novaCategoria);
                 jogo.setClassificacaoIndicativa(novaClassificacaoIndicativa);
+                jogo.setUnidades(novaUnidades);
+                jogo.setRegiao(novaRegiao);
+                jogo.setUnidades(novaUnidades);
+                jogo.setRegiao(novaRegiao);
                 break;
             }
         }
@@ -83,9 +88,11 @@ class LojaJogos {
                                                                                   // no arquivo
             for (ItemJogo item : itens) { // Percorre a lista de itens
                 writer.println(item.getNome() + "," + item.getCategoria() + ","
-                        + (item instanceof Jogo ? ((Jogo) item).getClassificacaoIndicativa() : "")); // Escreve os dados
-                                                                                                     // do item no
-                                                                                                     // arquivo
+                        + (item instanceof Jogo ? ((Jogo) item).getClassificacaoIndicativa() : "") + ","
+                        + (item instanceof Jogo ? ((Jogo) item).getUnidades() : "") + ","
+                        + (item instanceof Jogo ? ((Jogo) item).getRegiao() : "")); // Escreve os dados
+                                                                                    // do item no
+                                                                                    // arquivo
             }
             System.out.println("Jogos salvos com sucesso.");
         } catch (IOException e) {
@@ -102,14 +109,15 @@ class LojaJogos {
                 if (partes.length >= 2) { // Verifica se existem pelo menos 2 partes (nome e categoria)
                     String nome = partes[0]; // Obtém o nome do item
                     Categoria categoria = Categoria.valueOf(partes[1]); // Obtém a categoria do item
-                    int classificacaoIndicativa = partes.length >= 3 ? Integer.parseInt(partes[2]) : 0; // Obtém a
-                                                                                                        // classificação
-                                                                                                        // indicativa,
-                                                                                                        // se houver,
-                                                                                                        // senão assume
-                                                                                                        // o valor 0
-                    Jogo jogo = new Jogo(nome, categoria, classificacaoIndicativa); // Cria um novo objeto Jogo com os
-                                                                                    // dados lidos
+                    // Obtém a classificação indicativa, se houver, senão assume o valor 0
+                    int classificacaoIndicativa = partes.length >= 3 ? Integer.parseInt(partes[2]) : 0;
+                    int unidade = partes.length >= 4 ? Integer.parseInt(partes[3]) : 0;
+                    String regiao = partes.length >= 5 ? partes[4] : "";
+
+                    Jogo jogo = new Jogo(nome, categoria, classificacaoIndicativa, unidade, regiao); // Cria um novo
+                    // objeto Jogo com
+                    // os
+                    // dados lidos
                     adicionarItem(jogo); // Adiciona o jogo à lista de itens da loja
                 }
             }
@@ -121,5 +129,17 @@ class LojaJogos {
 
     public boolean verificarJogoExistente(String nomeRemover) {
         return false;
+    }
+
+    public void venderJogo(String nomeJogo, int quantidade_vendida) {
+        for (ItemJogo item : itens) { // Percorre a lista de itens
+            if (item.getNome().equals(nomeJogo) && item instanceof Jogo) { // Verifica se o nome do item corresponde e
+                                                                           // se é
+                // do tipo Jogo
+                Jogo jogo = (Jogo) item; // Faz um cast do item para a classe Jogo
+                jogo.setUnidades(jogo.getUnidades() - quantidade_vendida);
+                break;
+            }
+        }
     }
 }

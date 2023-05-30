@@ -3,11 +3,15 @@ class Jogo implements ItemJogo {
     private String nome; // Atributo para armazenar o nome do jogo
     private Categoria categoria; // Atributo para armazenar a categoria do jogo
     private int classificacaoIndicativa; // Atributo para armazenar a classificação indicativa do jogo
+    private int unidades;
+    private String regiao;
 
-    public Jogo(String nome, Categoria categoria, int classificacaoIndicativa) {
+    public Jogo(String nome, Categoria categoria, int classificacaoIndicativa, int unidades, String regiao) {
         this.nome = nome; // Construtor da classe que inicializa os atributos
         this.categoria = categoria;
         this.classificacaoIndicativa = classificacaoIndicativa;
+        this.unidades = unidades;
+        this.regiao = regiao;
     }
 
     public String getNome() {
@@ -35,9 +39,25 @@ class Jogo implements ItemJogo {
                                                                 // jogo
     }
 
+    public int getUnidades() {
+        return unidades;
+    }
+
+    public void setUnidades(int unidades) {
+        this.unidades = unidades;
+    }
+
+    public String getRegiao() {
+        return regiao;
+    }
+
+    public void setRegiao(String regiao) {
+        this.regiao = regiao;
+    }
+
     @Override
     public String toString() {
         return "Nome: " + nome + ", Categoria: " + categoria.getDescricao() + ", Classificação Indicativa: "
-                + classificacaoIndicativa;
+                + classificacaoIndicativa + ", Unidades: " + unidades + ", Região: " + regiao;
     }
 }
