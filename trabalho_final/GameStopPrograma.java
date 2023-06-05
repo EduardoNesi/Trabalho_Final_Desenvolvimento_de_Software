@@ -36,9 +36,10 @@ public class GameStopPrograma {
                     scanner.nextLine(); // Consumir a quebra de linha
                     System.out.print("Digite o nome do jogo: ");
                     String nome = scanner.nextLine(); // Lê o nome do jogo digitado pelo usuário
-                    if (loja.verificarItemExistente(nome)) {
+                    if (loja.verificarItemExistente(nome)) { // verifica se o item procurado pelo nome dele existe na
+                                                             // loja
                         System.out.println("Jogo já existe na loja. Por favor, tente novamente.");
-                        break;
+                        break;// para e retorna para o começo do case
                     }
                     System.out.println("Categorias disponíveis: ");
                     for (Categoria categoria : Categoria.values()) { // Percorre as categorias disponíveis
@@ -81,19 +82,23 @@ public class GameStopPrograma {
                     scanner.nextLine(); // Consumir a quebra de linha
                     System.out.print("Digite o nome do jogo que deseja atualizar: ");
                     String nomeAtualizar = scanner.nextLine(); // Lê o nome do jogo a ser atualizado
-                    if (!loja.verificarItemExistente(nomeAtualizar)) {
+                    if (!loja.verificarItemExistente(nomeAtualizar)) { // verifica se o jogo existe na loja
                         System.out.println("Jogo não encontrado na loja. Por favor, tente novamente.");
-                        break;
+                        break; // para e retorna para o começo
                     }
                     System.out.print("Digite o novo nome do jogo: ");
                     String novoNome = scanner.nextLine(); // Lê o novo nome do jogo
-                    if (!novoNome.equals(nomeAtualizar) && loja.verificarItemExistente(novoNome)) {
+                    if (!novoNome.equals(nomeAtualizar) && loja.verificarItemExistente(novoNome)) { // verifica se esse
+                                                                                                    // novo nome é igual
+                                                                                                    // a um jogo
+                                                                                                    // existente
                         System.out
                                 .println("O novo nome do jogo já existe na loja. Por favor, insira um nome diferente.");
-                        break;
+                        break; // para e retorna para o começo
                     }
                     System.out.print("Digite o novo nome do jogo: ");
-                    if (novoNome.equals(nomeAtualizar)) {
+                    if (novoNome.equals(nomeAtualizar)) { // verifica se o novo nome do jogo é igual ao jogo que você
+                                                          // está tentando atualizar
                         System.out.println(
                                 "O novo nome do jogo é igual ao nome atual. Por favor, insira um nome diferente.");
                         break;
@@ -138,12 +143,12 @@ public class GameStopPrograma {
                     String nomeJogo = scanner.nextLine(); // Lê o nome do jogo a ser atualizado
 
                     System.out.print("Digite a quantidade de vendas do jogo: ");
-                    int quantidade_vendida = scanner.nextInt();
+                    int quantidade_vendida = scanner.nextInt(); // Lê a quantidade de jogos a ser vendido
 
-                    if (!loja.verificarItemExistente(nomeJogo)) {
+                    if (!loja.verificarItemExistente(nomeJogo)) { // verifica se o jogo existe na loja
                         System.out.println("Jogo não encontrado na loja. Por favor, tente novamente.");
                     }
-                    loja.venderJogo(nomeJogo, quantidade_vendida);
+                    loja.venderJogo(nomeJogo, quantidade_vendida); // chama o método para vender o jogo
                     System.out.println("Jogo vendido com sucesso na loja GameStop.");
                 case 7:
                     loja.salvarDados("dados.txt"); // Salva os dados da loja no arquivo "dados.txt"
