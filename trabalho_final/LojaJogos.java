@@ -107,17 +107,21 @@ class LojaJogos {
                 String linha = scanner.nextLine(); // Lê a próxima linha
                 String[] partes = linha.split(","); // Divide a linha nos valores separados por vírgula
                 if (partes.length >= 2) { // Verifica se existem pelo menos 2 partes (nome e categoria)
-                    String nome = partes[0]; // Obtém o nome do item
-                    Categoria categoria = Categoria.valueOf(partes[1]); // Obtém a categoria do item
-                    // Obtém a classificação indicativa, se houver, senão assume o valor 0
+                    String nome = partes[0]; // Obtém o nome do jogo
+                    Categoria categoria = Categoria.valueOf(partes[1]); // Obtém a categoria do jogo
+
+                    // Obtém a classificação indicativa, se existir, senão assume o valor 0
                     int classificacaoIndicativa = partes.length >= 3 ? Integer.parseInt(partes[2]) : 0;
+
+                    // Obtém a quantidade de unidades, se existir, senão assume o valor 0
                     int unidade = partes.length >= 4 ? Integer.parseInt(partes[3]) : 0;
+
+                    // Obtém a região, se existir, senão assume uma string vazia
                     String regiao = partes.length >= 5 ? partes[4] : "";
 
-                    Jogo jogo = new Jogo(nome, categoria, classificacaoIndicativa, unidade, regiao); // Cria um novo
-                    // objeto Jogo com
-                    // os
-                    // dados lidos
+                    Jogo jogo = new Jogo(nome, categoria, classificacaoIndicativa, unidade, regiao);
+                    // Cria um novo objeto Jogo com os dados lidos
+
                     adicionarItem(jogo); // Adiciona o jogo à lista de itens da loja
                 }
             }
