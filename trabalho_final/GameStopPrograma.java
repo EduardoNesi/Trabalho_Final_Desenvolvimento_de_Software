@@ -26,8 +26,9 @@ public class GameStopPrograma {
             System.out.println("4. Atualizar dados de um jogo");
             System.out.println("5. Remover um jogo");
             System.out.println("6. Vender jogo");
-            System.out.println("7. Salvar dados em arquivo");
-            System.out.println("8. Sair");
+            System.out.println("7. Procure o jogo pelo nome dele");
+            System.out.println("8. Salvar dados em arquivo");
+            System.out.println("9. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = scanner.nextInt(); // Lê a opção escolhida pelo usuário
 
@@ -151,10 +152,17 @@ public class GameStopPrograma {
                     loja.venderJogo(nomeJogo, quantidade_vendida); // chama o método para vender o jogo
                     System.out.println("Jogo vendido com sucesso na loja GameStop.");
                 case 7:
-                    loja.salvarDados("dados.txt"); // Salva os dados da loja no arquivo "dados.txt"
+                    scanner.nextLine(); // Consumir a quebra de linha
+                    System.out.print("Digite o nome do jogo que procurar: ");
+                    String nomedoJogo = scanner.nextLine();
+                    loja.procurarJogo(nomedoJogo);
+
                     break;
 
                 case 8:
+                    loja.salvarDados("dados.txt"); // Salva os dados da loja no arquivo "dados.txt"
+                    break;
+                case 9:
                     System.out.println("Saindo...");
                     break;
 
@@ -163,7 +171,7 @@ public class GameStopPrograma {
                     break;
             }
 
-        } while (opcao != 8);
+        } while (opcao != 9);
 
         scanner.close(); // Fecha o Scanner
     }

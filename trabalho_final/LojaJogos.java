@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 // Classe principal que representa a loja de jogos
-class LojaJogos {
+public class LojaJogos {
     private List<ItemJogo> itens; // Lista para armazenar os itens da loja
 
     public LojaJogos() {
@@ -46,8 +46,7 @@ class LojaJogos {
     public void atualizarItem(String nome, String novoNome, Categoria novaCategoria, int novaClassificacaoIndicativa,
             int novaUnidades, String novaRegiao) {
         for (ItemJogo item : itens) { // Percorre a lista de itens
-            if (item.getNome().equals(nome) && item instanceof Jogo) { // Verifica se o nome do item corresponde e se é
-                                                                       // do tipo Jogo
+            if (item.getNome().equals(nome)) { // Verifica se o nome do item corresponde
                 Jogo jogo = (Jogo) item; // Faz um cast do item para a classe Jogo
                 jogo.setNome(novoNome); // Atualiza os dados do jogo
                 jogo.setCategoria(novaCategoria);
@@ -137,13 +136,28 @@ class LojaJogos {
 
     public void venderJogo(String nomeJogo, int quantidade_vendida) {
         for (ItemJogo item : itens) { // Percorre a lista de itens
-            if (item.getNome().equals(nomeJogo) && item instanceof Jogo) { // Verifica se o nome do item corresponde e
-                                                                           // se é
+            if (item.getNome().equals(nomeJogo)) { // Verifica se o nome do item corresponde e
+                                                   // se é
                 // do tipo Jogo
                 Jogo jogo = (Jogo) item; // Faz um cast do item para a classe Jogo
                 jogo.setUnidades(jogo.getUnidades() - quantidade_vendida);
                 break;
             }
+        }
+    }
+
+    public void procurarJogo(String nomeJogo) {
+        boolean jogoexistente = false;
+        for (ItemJogo item : itens) {
+            if (item.getNome().equals(nomeJogo)) {
+                jogoexistente = true;
+                System.out.println(item);
+            }
+
+        }
+        if (jogoexistente == false) {
+            System.out.println("O jogo não existe na loja");
+
         }
     }
 }
