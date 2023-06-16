@@ -150,7 +150,7 @@ public class GameStopPrograma {
                         System.out.println("Jogo não encontrado na loja. Por favor, tente novamente.");
                     }
                     loja.venderJogo(nomeJogo, quantidade_vendida); // chama o método para vender o jogo
-                    System.out.println("Jogo vendido com sucesso na loja GameStop.");
+                    break;
                 case 7:
                     scanner.nextLine(); // Consumir a quebra de linha
                     System.out.print("Digite o nome do jogo que procurar: ");

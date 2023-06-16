@@ -140,7 +140,12 @@ public class LojaJogos {
                                                    // se é
                 // do tipo Jogo
                 Jogo jogo = (Jogo) item; // Faz um cast do item para a classe Jogo
-                jogo.setUnidades(jogo.getUnidades() - quantidade_vendida);
+                if ((jogo.getUnidades() - quantidade_vendida < 0)) {
+                    System.out.println("Não existem unidades para realizar a venda");
+                } else {
+                    jogo.setUnidades(jogo.getUnidades() - quantidade_vendida);
+                    System.out.println("Jogo vendido com sucesso na loja GameStop.");
+                }
                 break;
             }
         }
